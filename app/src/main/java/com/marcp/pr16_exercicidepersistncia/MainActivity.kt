@@ -1,6 +1,9 @@
 package com.marcp.pr16_exercicidepersistncia
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +19,14 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+            val btn = findViewById<Button>(R.id.button);
+            val et = findViewById<EditText>(R.id.editTextText)
+
+            val filename = "myfile.txt"
+            val fileContents = et.text.toString();
+            this.openFileOutput(filename, Context.MODE_APPEND).use {
+                it.write(fileContents.toByteArray())
+            }
     }
 }
