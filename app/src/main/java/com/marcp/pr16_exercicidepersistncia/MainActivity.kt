@@ -21,12 +21,28 @@ class MainActivity : AppCompatActivity() {
         }
 
             val btn = findViewById<Button>(R.id.button);
-            val et = findViewById<EditText>(R.id.editTextText)
+            val ett = findViewById<EditText>(R.id.editTextText)
+            val etn = findViewById<EditText>(R.id.editTextNumber)
 
+        btn.setOnClickListener {
+            val name= ett.text.toString();
+            val number = etn.text.toString();
             val filename = "myfile.txt"
-            val fileContents = et.text.toString();
-            this.openFileOutput(filename, Context.MODE_APPEND).use {
-                it.write(fileContents.toByteArray())
+            var fileContents: String = "" ;
+            if (!name.isNullOrEmpty() && !number.isNullOrEmpty()) {
+                fileContents= name+";"+number
+            } else if (!name.isNullOrEmpty()) {
+                fileContents= name
+            } else if (!number.isNullOrEmpty()) {
+                fileContents = number
             }
+            if (!fileContents.isNullOrEmpty()) {
+                fileContents+="\n"
+                this.openFileOutput(filename, Context.MODE_APPEND).use {
+                    it.write(fileContents.toByteArray())
+                }
+            }
+        }
+
     }
 }
